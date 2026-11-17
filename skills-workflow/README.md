@@ -7,6 +7,12 @@ Prompts to initiate personal workflow styles:
 [Plan](plan/SKILL.md): initiate a planning session.
 - Note: has [end](plan/SKILL.END.md). If possible it should be another context injection which triggers only at the end of planning session. Fallback - add "look at the file at the end"-like line to the main file. Fallback - append to the same skill.
 
+[Research / investigate / evaluate](investigate/SKILL.md): gather evidence and run reversible experiments, following already-loaded workspace conventions and preserving the target.
+
+[Workspace maintenance](workspace-maintenance/SKILL.md): expand an initialized workspace's local file structure and update its navigation.
+
+[Workspace curation](workspace-curation/SKILL.md): check and curate existing workspace notes, sessions, backlog, goals, and navigation on request.
+
 [New-Reference](new-reference/SKILL.md): analyze a reference.
 - Note: it's important to sync paths mentioned here with [this](../workspace-local-layout/).
 - Note: it's probably better to make this work not only on the first access, but on consecutive ones as well (or use a separate skill): it has a lot of specific agent optimizations.

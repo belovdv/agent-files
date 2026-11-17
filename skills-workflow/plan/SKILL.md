@@ -15,7 +15,8 @@ In most cases investigations should be conducted by (low-cost) subagents. Even d
 
 ## First iteration
 
-- Collect necessary context: relevant sessions, todos, plans, roadmaps, code, and concise measurements. Avoid broad reading without a reason.
+- Formulate the actual question, intended outcome, constraints, and settled requirements before looking for existing solutions. Revisit the formulation when evidence changes; do not reopen an agreed requirement as an undecided option without explaining the conflict.
+- Collect necessary context: relevant sessions, backlog entries, plans, roadmaps, code, and concise measurements. Avoid broad reading without a reason.
 - Clarify uncertainty about the user's meaning or the session's goal. Do not ask the user to supply the solution; developing it is part of planning.
 - Offer a basic sketch and identify the high-level decisions. Keep the sketch cheap to revise.
 
@@ -30,12 +31,12 @@ In most cases investigations should be conducted by (low-cost) subagents. Even d
 ## Writing files
 
 During the session:
-- Keep a tiny note reflecting high-level design choices, including things intentionally deferred, and deferred discussion points.
-- When a large investigation was conducted - save a knowledge/stats file.
+- Append requirements, decisions and reasons, rejected options, uncertain findings, and deferred questions to `agents/sessions/<session>/log.md`. At major milestones, update `session.md`, including its Carry-forward section for important user corrections and persistent facts. Keep settled requirements distinct from unresolved consequences.
+- Save substantial investigation findings and measurements in the session directory; distill reusable material at handoff.
 - Use (write) small scripts and run benchmarks if needed.
 
 In the end:
-- Write a design document (do not write it during the session though).
+- Write the agreed design document in the session directory.
 
 Other than that do not modify anything without explicit approval.
 

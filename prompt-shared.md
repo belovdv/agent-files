@@ -57,7 +57,7 @@ Check the current environment capabilities:
   - Extensions
 - Available environment-specific but disabled (not present in the context) things (skills, tools)
 - **Instruction loading and scope**: where user and workspace instructions are loaded, how public and private instructions are included, and how their precedence is expressed. Ensure the private workspace instructions are read after the public ones and override them without duplicating them.
-- **Skill activation and safeguards**: explicit invocation, automatic selection, hooks, or supervisor support. Adapt to the harness; see the [safeguard examples](skills-watching/README.md).
+- **Skill activation and safeguards**: explicit invocation, automatic selection, hooks, or supervisor support. Adapt to the harness using the [safeguard examples](skills-watching/README.md). Describe prompts, mode switches, hooks, and continuous supervision as native features only when verified. Label plain-text conventions as instructions.
 - **Persistence and context compression**: what survives a new session or compaction, and where durable decisions should be stored.
 - **Permissions**: accessible paths, allowed writes, network/tool restrictions, and approval mechanisms.
 - **Model selection**: which models can actually be selected for the main agent and subagents, rather than merely listed by the provider.
@@ -68,8 +68,8 @@ Check the current context:
   - user-level: predefined
   - user-level: available to user, e.g. `~/<harness>/AGENTS.md`
 - **Skills**
-  - environment-specific
-  - gates/watching, workflow, knowledge
+  - harness-provided skills, including authoring aids. Keep these in the source harness by default and surface any proposed replacement for user review.
+  - portable user skills: gates/watching, workflow, knowledge
 - **Tools**
 
 Write discovery results to `./tmp/<session>/current-setup.md`
@@ -79,6 +79,12 @@ Write discovery results to `./tmp/<session>/current-setup.md`
 Read these compact templates directly; do not create or commit a separate summary of them. Keep discovery in the session directory and durable environment details and decisions in the ignored setup record.
 
 Follow the links from the root [README](README.md) to read what `agent-files` proposes. Adapt it to the current environment specifics (e.g. remove lowest-cost model suggestion if there's only a single one available).
+
+## Workspace knowledge and discovery
+
+For workspace setup/update, read the target's public instructions, then its private instructions, then its index and relevant notes. Preserve the intended precedence. If the harness cannot express it, report the conflict and propose an adaptation.
+
+Use the [layout specification](skills-workflow/workspace-maintenance/SKILL.md#layout) and [migration guidance](workspace-local-layout/README.md#migration) for workspace setup/update. Follow the selected workflow's approval and backup steps. Verify the resulting paths and navigation. Write local paths and startup/discovery rules into the generated workspace instructions, preserving user-authored guidance separately from agent-written additions.
 
 ## Compare
 
@@ -110,6 +116,10 @@ Batch related decisions into a concise comparison: source behavior, proposed alt
 For things from `current-setup` that are strictly better and generic enough (ask if in doubt) - list them and suggest that the user add them upstream.
 
 ## Prepare or apply changes
+
+Write generated instructions for the target environment. Keep this repository's operating instructions, setup provenance, adaptation rationale, and review commentary in setup records or proposal notes unless explicitly requested in the generated content.
+
+Before handing off a user-level proposal or applying a workspace update, read every instruction or skill file that will be copied or changed, including its headings, frontmatter, and links. For each addition, check that it tells the target agent something it needs to know or do. Look for copied source-workspace rules, source-only paths and conventions such as `<date>-<topic>`, provenance headers, and explanations addressed to the setup reviewer. Move any useful setup commentary to the setup record or proposal notes, then recheck the affected output. Record which files passed the check in the proposal notes.
 
 User-level workflows write proposals in `./tmp/<session>/`; they do not change the installed setup.
 Final proposal will suggest to modify some files and folders (likely including `~/<>/AGENTS.md` and `~/.agents/skills`) - make a backup for them.

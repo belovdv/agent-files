@@ -10,7 +10,7 @@ Read `<target>/agents/.agent-files.md`
 
 ## Inspect current setup
 
-Analyze current layout, start with `<target>/agents/index.md`.
+Analyze the current layout, starting with `<target>/agents/index.md`.
 
 Use `<target>/agents/.agent-files.md` to get revision it was created on - check what was proposed back then.
 

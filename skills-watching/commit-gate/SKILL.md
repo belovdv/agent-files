@@ -3,28 +3,24 @@ name: commit-gate
 description: Checklist before git-commit
 ---
 
-## Agent-review
+## Commit scope
 
-Review first; do not fix issues encountered during this checklist.
+Stage the intended files and hunks, including any new files that belong in the commit. Preserve unrelated working-tree changes. Check that the staged snapshot forms one logical change. If the snapshot needs splitting, explain the split before proceeding.
 
-Use (low-cost) subagents: both to preserve your context and to get a fresh-eyes opinion.
+## Review gate
 
-- Use the most recent successful applicable build, lint, formatting, and test checks from this session. Make sure everything needed was successfully run.
-- Confirm the changes form one logical diff. Do not mix unrelated fixes or refactors with a feature. If splitting is needed - suggest; if a split was already suggested, check atomicity.
-- Review the whole diff, including new files, for debug prints, commented-out code, temporary test guards, and other stale artifacts. (subagents)
-- Check content and the eventual message for private info leakage (see the **## Rules**). (subagents)
-- Check workspace-specific instructions if any. (subagent)
-- Make sure parent commit is not `wip: ...`.
+Use `run-code-review` to review the staged snapshot with a fresh, low-cost subagent. Check workspace commit rules and confirm the parent is not a `wip: ...` commit unless using the local WIP exception below.
 
-If an issue is found, report it and stop before committing.
+- If there are significant findings or required checks are incomplete, report them and wait for the user to decide what to do.
+- If the only findings are typo-level and the fixes leave behavior and prior verification intact, fix them and verify the affected lines and staged diff. Tell the user what the review found and what you fixed. Stop and ask whether to review again before proceeding with the updated commit.
 
-## User-review
+## User review and approval
 
-Make sure user reviewed the code. Exception: user explicitly told to skip this step. In that case there must be an agent usage (authorship) disclosure in the code (ideally already present) or in the commit message.
+Make sure the user reviewed the code and follow any workspace-specific understanding checklist. If the user explicitly skips their review, make sure there's an agent usage disclosure in the code or the proposed commit message.
 
-## Message and approval
+### Commit message
 
-Code, written mostly by agent, should be explained in detail in the commit's body - what and why - unless the diff is tiny/cosmetic.
+Use the commit body to explain what changed and why when that context is useful. Keep detailed design rationale and review evidence in the local archive.
 
 Unless overridden by workspace: format: `<significance> [<scope1>,<scope2>,…] <optional logical group: > <header>`
 
@@ -36,9 +32,11 @@ Examples:
 - `2 [crates/server,crates/client] api: switch to json`
 - `4 [package/cli.py] clarify comments for xxx feature`
 
-Propose the message; leave the body empty for trivial changes. Ask: "Approve, or should I adjust anything?" Revise if requested and ask again. Do not run `git commit` until the user explicitly approves the proposed commit.
+Propose the message and leave the body empty for trivial changes. Include the proposed message in the review for private information. If that version has yet to be checked, request a focused check through `run-code-review`. Obtain explicit approval for the proposed commit before running `git commit`.
 
-After approval, make a final disclosure check, commit, and report explicitly that it was made with a concise summary. Update relevant agent session notes.
+## Commit
+
+Confirm the staged snapshot and message match what was approved and covered by review or the typo-level verification above. Commit them and update relevant work notes.
 
 ## Notes
 

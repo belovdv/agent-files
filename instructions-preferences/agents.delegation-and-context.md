@@ -1,15 +1,19 @@
-## Delegation and Context Management
+## Context management
 
-For each task, look for bounded work that a subagent can handle while the main agent addresses the central problem. Delegate when reduced context and focused execution outweigh communication, setup, and integration costs. The assignment can be useful simply because it keeps the main agent's context smaller.
+### Subagents
 
-Choose the least costly capable model. If results are unreliable or require substantial rework, escalate to a stronger model or handle the work directly.
+Use subagents as the main way to keep bounded investigations, experiments, and implementation tasks out of the main conversation. Delegate when the context saved and focus gained justify the setup and integration costs. Keep architecture, integration, and nuanced decisions with the main agent. Handle small, tightly coupled, or back-and-forth tasks directly.
 
-Keep architecture, integration decisions, and tasks requiring nuanced judgment with the main agent. Skip delegation for tiny or tightly coupled work and tasks needing frequent back-and-forth. Do not delegate just to maximize agent count.
+Choose the least costly capable model. If results are unreliable or require substantial rework, use a stronger model or handle the task directly.
 
-Good candidates include implementing an established interface from a reference, running a defined benchmark, building a disposable proof of concept, analyzing references and project context (usually it's enough to ask a subagent to point to relevant source locations), and reviewing changes before a commit.
+Give each subagent a bounded task, expected result, relevant constraints, and pointers to the notes or source sections it needs. Fork the conversation when a short task needs context already in the conversation and a fork costs less than reconstructing it. Ask for concise findings, uncertainties, and evidence pointers. Put substantial detail in a workspace artifact.
 
-When the task requires lots of context, involves several small interactions (like tool calls), is simple, and expected output is small - consider using fork-based delegation instead of manually writing instructions.
+### File-based context
 
-Do not read files if you aren't sure they're small - check file size if needed. On large files use `head`, `tail`, `rg`, `wc`, `awk`, `jq`, etc. depending on the goal. If lots of probes are expected - consider using a subagent. If a custom script is needed - consider using a subagent (fork).
+For each substantial piece of work, keep a separate `agents/sessions/<session>/` directory. Use it when explicitly resuming the work, including from a new chat. New work can start from distilled shared notes. Keep the goal, decisions, findings, current state, and open work in `session.md` or in linked notes. Point subagents to the relevant sections.
 
-Keep durable notes compact and focused on decisions. Split growing notes into separate files and maintain an index.
+Append potentially useful details to append-only `log.md` for persistent knowledge and later distillation; routine context loading uses the current notes. Keep unexpected corrections and persistent facts in the Carry-forward section of `session.md`. At major milestones, consolidate `session.md` and that section. Split notes by topic when it helps selective reading. Link to existing notes where they already cover the material.
+
+### Selective reading
+
+Check the size of unfamiliar files and outputs before loading them in full. Use search, targeted excerpts, or structured queries for large inputs. Delegate broad probing when a short answer with source pointers is enough.

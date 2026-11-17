@@ -7,7 +7,8 @@ This covers everything that goes into `~/AGENTS.md` and does not need higher pri
 [Delegation-and-Context](agents.delegation-and-context.md): encourage the agent to delegate more. This is the most influential single optimization for context clarity (and thus model effectiveness) and token consumption efficiency (less context each round).
 - Note: in some environments there isn't a meaningfully lower-cost model - adjust if needed
 
-[Responding](agents.responding.md): addresses a personal pain point: I ask a small or less important question and expect a quick answer (or an explanation of why one is unavailable), but the agent starts digging for minutes. It costs tokens, but it saves time.
+[User interaction](agents.user-interaction.md): interpreting requests, choosing work styles and their boundaries, handling corrections, and communicating results. Detailed procedures live in the referenced workflow skills.
+- During user setup/update, adapt skill references to the harness's supported invocation. Preserve natural-language planning requests; do not introduce a required planning marker.
 
 [Code-and-Tests](agents.code-and-tests.md): modern agents tend to produce bloated code. This attempts to address some common sources.
 

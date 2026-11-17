@@ -1,40 +1,13 @@
 # Workspace layout
 
-Yet-to-be-stabilized layout for workspace files (mostly git excluded). Agent caches, persistent logs, and related files.
+See the [layout and structural expansion rules](../skills-workflow/workspace-maintenance/SKILL.md#layout). Migrations from older or nonconforming layouts use the [agent-files workspace setup](../prompt-workspace-setup.md) or [workspace update](../prompt-workspace-update.md) workflow.
 
-## Layout
+## Migration
 
-Private directories should be eagerly initialized.
-- Motivation: avoid putting their full specification in the permanent prompt.
+Migration from older or nonconforming layouts belongs to agent-files workspace setup/update. Analyze the existing layout starting with `<target>/agents/index.md`. Map existing material to the current specification, preserve active guidance and useful history, identify conflicts, and update references to moved files. Follow the selected workflow's approval and backup steps before applying changes.
 
-The word *private* will be used for local-only (git excluded) files. Usually (unless the specific file is created to be shared) they can contain private info.
+A workspace can use a subset of the layout; absent collections with no content do not require migration or empty directories. Preserve documented extensions that have clear ownership and discovery routes. Resolve conflicting conventions during setup/update rather than leaving competing destinations.
 
-Root folders should be added to `.git/info/exclude`.
+If the workspace used `agents/tmp/`, map disposable files to root `tmp/` and material worth retaining to its session or persistent home. Check for collisions and verify moved contents before retiring the old scratch directory.
 
-`./`
-- `agents/`: entry to private agent-used agent-maintained files world.
-  - `.agent-files.md`, `.agent-files.user.md`: used by `agent-files` workflows.
-  - `AGENTS.md`: private workspace instructions. Read the public root `AGENTS.md` first; keep only additions and overrides here, without duplicating public instructions. The private file always takes precedence when these two files conflict.
-  - `index.md`: compact navigation.
-    - The starting point for navigating local agent files.
-    - Should not mention every single file - should be small enough to load it every single time. Logs, deeply nested directories, etc. should use their own indexes (if needed - usually not).
-  - `todo.md`: workspace-level list to keep postponed actions.
-  - `roadmap.md` (optional): high-level project roadmap
-  - `sessions/`: active session files and backlog
-    - Note: overriding harness's default session file path might require explicit user action.
-    - `sessions/backlog/`
-  - `knowledge`: deep-dive, investigation results.
-  - `reference/`: mirror for `./reference`, keeps concise overview for already-analyzed references: its importance and links to documentation and relevant modules.
-  - `scripts/`: reusable agent-written scripts (e.g. log scraping)
-  - `logs/`: general persistent log files
-  - `stats/`: log files that contain relevant statistics. Used to analyze long-term progress.
-  - `tmp/`: disposable agent scratchpad, subject to the cleanup policy below.
-    - `logs/`, `stats/`, `scripts/`: temporary artifacts; move anything worth keeping into the corresponding persistent directory.
-- `reference/`: keeps project-external files that can be used as a reference if needed: existing implementations, relevant papers, etc.
-  - `<project>/`: usually git clone
-  - `<paper>.pdf`: usually downloaded public paper
-- `tmp/`: disposable workspace scratchpad; use it instead of `/tmp/`.
-
-## Migration from previous revision
-
-(will describe nontrivial migration rules)
+Establish separate Layout and Topics sections in `agents/index.md` using the specification's catalog format. Wire startup reading of the catalog, user notes, agent observations, and active-session list into the generated workspace instructions. Verify links and preserve user-authored guidance separately from agent-written additions.

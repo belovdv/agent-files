@@ -4,15 +4,16 @@ Safeties that ideally should be checked for each message in parallel by single-p
 
 These specifications can also serve as independent safeguards. This repository does not prescribe or configure the mechanism used by a harness.
 
-[Commit-Gate](commit-gate/SKILL.md).
+[Commit-Gate](commit-gate/SKILL.md): review and approve a staged snapshot before committing.
 
-[Code-Present](code-present/SKILL.md): checks before presenting code to the user.
-Deferred: generalizing this checklist beyond code. Keep its coding scope until concrete non-code review needs justify a separate or broader checklist.
+[Run-Code-Review](run-code-review/SKILL.md): prepare and run a review as the requester.
+
+[Code-Review](code-review/SKILL.md): inspect the change and give a verdict as the reviewer.
 
 [Scope-Creep](scope-creep/SKILL.md): make sure we didn't sidetrack from the session's objective.
 Use at explicit checkpoints when continuous supervision is unavailable; examples follow.
 
-[Session-Handoff](session-handoff/SKILL.md): make sure agent files are consistent.
+[Session-Handoff](session-handoff/SKILL.md): distill reusable findings and archive session records on a handoff or archive request.
 
 [Installing-Tools](installing-tools/SKILL.md): basic verification of unknown third-party tools.
 
